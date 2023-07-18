@@ -1,0 +1,24 @@
+* {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.container {
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  width: 300px;
+  gap: 0;
+  box-sizing: border-box;
+}
+
+.container > div {
+  background-color: #ccc;
+  height: 100px;
+  box-sizing: border-box;
+  border: 2.5px solid black;
+}
