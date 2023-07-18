@@ -17,8 +17,67 @@ h1 {
 }
 
 .container > div {
-  background-color: #ccc;
   height: 100px;
   box-sizing: border-box;
   border: 2.5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.container :first-child,
+.container :nth-child(2),
+.container :nth-child(3) {
+  border-top: none;
+}
+
+.container :nth-child(3n + 1) {
+  border-left: none;
+}
+
+.container :nth-child(3n + 3) {
+  border-right: none;
+}
+
+.container :last-child,
+.container :nth-child(7),
+.container :nth-child(8) {
+  border-bottom: none;
+}
+
+.cell.x::after,
+.cell.x::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 75px;
+  background-color: black;
+}
+
+.cell.x::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after {
+  transform: rotate(-45deg);
+}
+
+.cell.o::after,
+.cell.o::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cell.o::before {
+  width: 75px;
+  height: 75px;
+  background-color: black;
+}
+
+.cell.o::after {
+  width: 55px;
+  height: 55px;
+  background-color: white;
 }
