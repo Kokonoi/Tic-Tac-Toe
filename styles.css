@@ -16,7 +16,7 @@ h1 {
   box-sizing: border-box;
 }
 
-.container > div {
+.cell {
   height: 100px;
   box-sizing: border-box;
   border: 2.5px solid black;
@@ -24,6 +24,7 @@ h1 {
   justify-content: center;
   align-items: center;
   position: relative;
+  cursor: pointer;
 }
 
 .container :first-child,
@@ -80,4 +81,9 @@ h1 {
   width: 55px;
   height: 55px;
   background-color: white;
+}
+
+.cell.o,
+.cell.x {
+  cursor: not-allowed;
 }
