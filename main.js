@@ -1,19 +1,28 @@
 const gameBoard = (() => {
-  const board = ["", "", "", "", "", "", "", "", ""];
+  const board = ["", "", "", "x", "", "", "o", "", ""];
 
   const getBoard = () => board;
 
-  return getBoard;
+  return { getBoard };
 })();
 
-const displayController = (() => {
+const Player = (playerName, symbol) => {
+  return { playerName, symbol };
+};
+
+const DisplayController = (() => {
   const cells = document.querySelectorAll(".cell");
 
   const renderBoard = () => {
     const board = gameBoard.getBoard();
     cells.forEach((element, index) => {
-      element.classList.add(board[index]);
+      const className = board[index];
+      if (className !== "") {
+        element.classList.add(className);
+      }
     });
   };
   return { renderBoard };
 })();
+
+DisplayController.renderBoard();
