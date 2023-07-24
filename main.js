@@ -22,6 +22,9 @@ const DisplayController = (() => {
       }
     });
   };
+
+  const clickHandle = () => {};
+
   return { renderBoard };
 })();
 
