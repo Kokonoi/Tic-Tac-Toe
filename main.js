@@ -39,6 +39,12 @@ const DisplayController = (() => {
     symbol = symbol === "x" ? "o" : "x"; // Toggle between "x" and "o"
   };
 
+  const displayBlockedAccess = () => {
+    cells.forEach((cell) => {
+      cell.style.cursor = "not-allowed";
+    });
+  };
+
   const winningCombinations = [
     [0, 1, 2], // top row
     [3, 4, 5],
@@ -58,10 +64,12 @@ const DisplayController = (() => {
         if (board[a] === "x") {
           displayText.innerText = `${playerOne.name} wins!`;
           resetButton.style.display = "block";
+          displayBlockedAccess();
           return;
         } else {
           displayText.innerText = `${playerTwo.name} wins!`;
           resetButton.style.display = "block";
+          displayBlockedAccess();
           return;
         }
       }
@@ -69,6 +77,7 @@ const DisplayController = (() => {
     if (board.every((cell) => cell !== "")) {
       displayText.innerText = "It's a draw!";
       resetButton.style.display = "block";
+      displayBlockedAccess();
     }
   };
 
@@ -76,6 +85,8 @@ const DisplayController = (() => {
   const putSymbol = (cell) => {
     if (cell.classList.contains("x") || cell.classList.contains("o")) {
       return;
+    } else if (displayText.innerText !== "") {
+      return; // Game has ended, return early to prevent further input
     } else {
       cell.classList.add(symbol);
       gameBoard.updateBoard(
@@ -98,7 +109,7 @@ const DisplayController = (() => {
 
   const renderBoard = () => {
     const board = gameBoard.getBoard();
-    const resetGame = resetButton.addEventListener("click", resetBoard);
+    resetButton.addEventListener("click", resetBoard);
     cells.forEach((element, index) => {
       const className = board[index];
       if (className !== "") {
