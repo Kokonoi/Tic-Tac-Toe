@@ -38,12 +38,14 @@ const DisplayController = (() => {
 
   //adds event listeners
   const clickHandle = () => {
-    cells.forEach((cell, index) => {
+    cells.forEach((cell) => {
       cell.addEventListener("click", () => {
         putSymbol(cell);
       });
     });
   };
+
+  const winningCond = () => {};
 
   const renderBoard = () => {
     const board = gameBoard.getBoard();
