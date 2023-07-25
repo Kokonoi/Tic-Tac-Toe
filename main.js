@@ -23,11 +23,15 @@ const DisplayController = (() => {
   let symbol = "x";
   const playerOne = Player("Player 1", "x");
   const playerTwo = Player("Player 2", "o");
+  const displayText = document.querySelector("h2");
+  const resetButton = document.querySelector("button");
 
   const resetBoard = () => {
     cells.forEach((cell) => {
       cell.classList.remove("x", "o");
     });
+    displayText.innerText = "";
+    resetButton.style.display = "none";
     gameBoard.resetBoard();
   };
 
@@ -52,19 +56,19 @@ const DisplayController = (() => {
       const [a, b, c] = combinations;
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         if (board[a] === "x") {
-          alert(`${playerOne.name} wins!`);
-          resetBoard();
+          displayText.innerText = `${playerOne.name} wins!`;
+          resetButton.style.display = "block";
           return;
         } else {
-          alert(`${playerTwo.name} wins!`);
-          resetBoard();
+          displayText.innerText = `${playerTwo.name} wins!`;
+          resetButton.style.display = "block";
           return;
         }
       }
     }
     if (board.every((cell) => cell !== "")) {
-      alert("It's a draw!");
-      resetBoard();
+      displayText.innerText = "It's a draw!";
+      resetButton.style.display = "block";
     }
   };
 
@@ -94,6 +98,7 @@ const DisplayController = (() => {
 
   const renderBoard = () => {
     const board = gameBoard.getBoard();
+    const resetGame = resetButton.addEventListener("click", resetBoard);
     cells.forEach((element, index) => {
       const className = board[index];
       if (className !== "") {
