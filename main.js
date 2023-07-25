@@ -3,7 +3,11 @@ const gameBoard = (() => {
 
   const getBoard = () => board;
 
-  return { getBoard };
+  const updateBoard = (index, symbol) => {
+    board[index] = symbol;
+  };
+
+  return { getBoard, updateBoard };
 })();
 
 const Player = (playerName, symbol) => {
@@ -19,20 +23,24 @@ const DisplayController = (() => {
   };
 
   //puts symbols and checks if a cell already has a symbol
-  const putSymbol = (cell, symbolClass) => {
-    if (cell.classList.contains(symbolClass)) {
+  const putSymbol = (cell) => {
+    if (cell.classList.contains("x") || cell.classList.contains("o")) {
       return;
     } else {
-      cell.classList.add(symbolClass);
+      cell.classList.add(symbol);
+      gameBoard.updateBoard(
+        Array.from(cell.parentNode.children).indexOf(cell), // Get the index of the cell in its parent
+        symbol
+      );
       changeSymbol();
     }
   };
 
   //adds event listeners
   const clickHandle = () => {
-    cells.forEach((cell) => {
+    cells.forEach((cell, index) => {
       cell.addEventListener("click", () => {
-        putSymbol(cell, symbol);
+        putSymbol(cell);
       });
     });
   };
@@ -46,6 +54,7 @@ const DisplayController = (() => {
       }
     });
   };
+  clickHandle();
   return { renderBoard };
 })();
 
