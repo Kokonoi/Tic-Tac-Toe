@@ -51,9 +51,15 @@ const DisplayController = (() => {
     for (const combinations of winningCombinations) {
       const [a, b, c] = combinations;
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        alert(`${playerOne.name} wins!`);
-        resetBoard();
-        return;
+        if (board[a] === "x") {
+          alert(`${playerOne.name} wins!`);
+          resetBoard();
+          return;
+        } else {
+          alert(`${playerTwo.name} wins!`);
+          resetBoard();
+          return;
+        }
       }
     }
     if (board.every((cell) => cell !== "")) {
