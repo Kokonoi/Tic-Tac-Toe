@@ -29,9 +29,11 @@ const DisplayController = (() => {
   const resetBoard = () => {
     cells.forEach((cell) => {
       cell.classList.remove("x", "o");
+      cell.style.cursor = "pointer";
     });
     displayText.innerText = "";
     resetButton.style.display = "none";
+
     gameBoard.resetBoard();
   };
 
@@ -93,6 +95,7 @@ const DisplayController = (() => {
         Array.from(cell.parentNode.children).indexOf(cell), // Get the index of the cell in its parent
         symbol
       );
+      cell.style.cursor = "not-allowed";
       checkWinningComb();
       changeSymbol();
     }
