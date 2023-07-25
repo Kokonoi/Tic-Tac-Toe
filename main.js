@@ -1,5 +1,5 @@
 const gameBoard = (() => {
-  const board = ["", "", "", "x", "", "", "o", "", ""];
+  const board = ["", "", "", "", "", "", "", "", ""];
 
   const getBoard = () => board;
 
@@ -12,25 +12,32 @@ const Player = (playerName, symbol) => {
 
 const DisplayController = (() => {
   const cells = document.querySelectorAll(".cell");
+  let symbol = "x";
 
-  //pust symbols and checks if a cell already has a symbol
-  const putSymbol = (cell, symbol) => {
-    if (cell.classList.contains(symbol)) {
+  const changeSymbol = () => {
+    symbol = symbol === "x" ? "o" : "x"; // Toggle between "x" and "o"
+  };
+
+  //puts symbols and checks if a cell already has a symbol
+  const putSymbol = (cell, symbolClass) => {
+    if (cell.classList.contains(symbolClass)) {
       return;
-    } else cell.classList.add(symbol);
+    } else {
+      cell.classList.add(symbolClass);
+      changeSymbol();
+    }
   };
 
   //adds event listeners
   const clickHandle = () => {
     cells.forEach((cell) => {
       cell.addEventListener("click", () => {
-        putSymbol(cell, "x");
+        putSymbol(cell, symbol);
       });
     });
   };
 
   const renderBoard = () => {
-    clickHandle();
     const board = gameBoard.getBoard();
     cells.forEach((element, index) => {
       const className = board[index];
@@ -39,7 +46,7 @@ const DisplayController = (() => {
       }
     });
   };
-  return { renderBoard, clickHandle };
+  return { renderBoard };
 })();
 
 DisplayController.renderBoard();
