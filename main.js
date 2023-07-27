@@ -33,7 +33,7 @@ const DisplayController = (() => {
     });
     displayText.innerText = "";
     resetButton.style.display = "none";
-
+    symbol = "x";
     gameBoard.resetBoard();
   };
 
